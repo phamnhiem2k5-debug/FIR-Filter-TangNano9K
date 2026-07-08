@@ -89,69 +89,60 @@ st.markdown("""
         color: #1e293b;
     }
 
-    /* ── TAB STYLING FIX PUBLIC ── */
-    /* Bọc selector trong stTabs để CSS chỉ tác động đến tab chính, ổn định hơn khi public */
-    div[data-testid="stTabs"] div[role="tablist"],
-    div[data-testid="stTabs"] div[data-baseweb="tab-list"] {
-        background: #f8fafc !important;
-        border-radius: 14px 14px 0 0 !important;
-        border-bottom: 2px solid #e2e8f0 !important;
-        padding: 4px 8px 0 8px !important;
-        gap: 8px !important;
+    /* ── TAB STYLING ── */
+    div[role="tablist"] {
+        background: #f8fafc;
+        border-radius: 14px 14px 0 0;
+        border-bottom: 2px solid #e2e8f0;
+        padding: 4px 8px 0 8px;
+        gap: 8px;
         display: flex !important;
-        width: 100% !important;
         justify-content: center !important;
-        overflow-x: auto !important;
     }
 
-    div[data-testid="stTabs"] button[data-baseweb="tab"],
-    div[data-testid="stTabs"] button[role="tab"] {
+    button[data-baseweb="tab"],
+    button[data-testid="stTab"] {
         font-family: 'Inter', sans-serif !important;
         font-size: 14px !important;
         font-weight: 600 !important;
         color: #475569 !important;
         border-radius: 10px 10px 0 0 !important;
-        padding: 12px 16px !important;
+        padding: 12px 24px !important;
         border: none !important;
         background: transparent !important;
         transition: all 0.2s ease !important;
-        letter-spacing: -0.01em !important;
-        flex: 1 1 0 !important;
-        justify-content: center !important;
+        letter-spacing: -0.01em;
+        flex: 1 1 0% !important;
         text-align: center !important;
-        height: 52px !important;
-        white-space: nowrap !important;
     }
 
-    div[data-testid="stTabs"] button[data-baseweb="tab"] p,
-    div[data-testid="stTabs"] button[role="tab"] p {
-        font-size: 14px !important;
-        font-weight: inherit !important;
-        white-space: nowrap !important;
-    }
-
-    div[data-testid="stTabs"] button[data-baseweb="tab"]:hover,
-    div[data-testid="stTabs"] button[role="tab"]:hover {
+    button[data-baseweb="tab"]:hover,
+    button[data-testid="stTab"]:hover {
         color: #1d4ed8 !important;
         background: #eff6ff !important;
     }
 
-    div[data-testid="stTabs"] button[data-baseweb="tab"][aria-selected="true"],
-    div[data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+    button[aria-selected="true"][data-baseweb="tab"],
+    button[aria-selected="true"][data-testid="stTab"] {
         color: #1d4ed8 !important;
         font-weight: 700 !important;
         background: #ffffff !important;
-        border-bottom: 3px solid #ff4b5c !important;
-        box-shadow: 0 -2px 8px rgba(29,78,216,0.08) !important;
+        border-bottom: 2px solid #1d4ed8 !important;
+        box-shadow: 0 -2px 8px rgba(29,78,216,0.08);
     }
 
-    div[data-testid="stTabs"] div[data-testid="stTabsContent"] {
-        border: 1.5px solid #e2e8f0 !important;
-        border-top: none !important;
-        border-radius: 0 0 14px 14px !important;
-        padding: 24px 24px 28px 24px !important;
-        background: #ffffff !important;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.04) !important;
+    /* Đổi màu thanh trượt gạch chân của tab hoạt động từ đỏ sang xanh dương trên Streamlit Cloud */
+    div[role="tablist"] > div {
+        background-color: #1d4ed8 !important;
+    }
+
+    div[data-testid="stTabsContent"] {
+        border: 1.5px solid #e2e8f0;
+        border-top: none;
+        border-radius: 0 0 14px 14px;
+        padding: 24px 24px 28px 24px;
+        background: #ffffff;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.04);
     }
 
     /* ── METRIC CARDS ── */
@@ -320,19 +311,12 @@ st.markdown("""
     }
 
     /* Responsive grid */
-    @media (max-width: 900px) {
-        div[data-testid="stTabs"] div[role="tablist"],
-        div[data-testid="stTabs"] div[data-baseweb="tab-list"] {
-            overflow-x: auto !important;
-            flex-wrap: nowrap !important;
-            justify-content: flex-start !important;
+    @media (max-width: 768px) {
+        div[role="tablist"] {
+            overflow-x: auto;
+            flex-wrap: nowrap;
         }
-        div[data-testid="stTabs"] button[data-baseweb="tab"],
-        div[data-testid="stTabs"] button[role="tab"] {
-            flex: 0 0 auto !important;
-            min-width: 170px !important;
-        }
-        div[data-testid="stTabs"] div[data-testid="stTabsContent"] {
+        div[data-testid="stTabsContent"] {
             padding: 14px !important;
         }
     }

@@ -1,0 +1,29 @@
+Resource	Usage	Utilization
+Logic	2063/8640	24%
+    --LUT,ALU,ROM16	2063(2045 LUT, 18 ALU, 0 ROM16)	-
+    --SSRAM(RAM16)	0	-
+Register	3556/6693	54%
+    --Logic Register as Latch	0/6480	0%
+    --Logic Register as FF	3553/6480	55%
+    --I/O Register as Latch	0/213	0%
+    --I/O Register as FF	3/213	2%
+CLS	2805/4320	65%
+I/O Port	7/71	10%
+I/O Buf	7	-
+    --Input Buf	4	-
+    --Output Buf	3	-
+    --Inout Buf	0	-
+BSRAM	4 SDPB; 2 pROM	24%
+DSP	1 MULTADDALU18X18	10%
+
+I/O Bank Usage Summary:
+I/O Bank	Usage	Utilization
+bank 1	1/25	4%
+bank 2	2/23	9%
+bank 3	4/23	18%
+
+Clock Resource Usage Summary:
+Clock Resource	Usage	Utilization
+PRIMARY	1/8	13%
+LW	2/8	25%
+GCLK_PIN	2/3	67%

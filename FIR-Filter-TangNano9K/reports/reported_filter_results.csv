@@ -1,0 +1,4 @@
+case,active_taps,hardware_taps,reported_mse,reported_max_error,reported_ep,reported_es,source_pdf_page
+1,19,200,0,0,0.013787,0.011013,67
+2,75,200,0,0,0.001092,0.001099,67
+3,175,200,0,0,0.000409,0.000452,67

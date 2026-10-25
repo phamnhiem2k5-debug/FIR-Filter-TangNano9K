@@ -1,0 +1,274 @@
+eport Title	Timing Analysis Report
+Design File	D:\DO_AN_FIR\fpga_1\impl\gwsynthesis\fpga_1.vg
+Physical Constraints File	D:\DO_AN_FIR\fpga_1\src\fpga_1.cst
+Timing Constraint File	---
+Tool Version	V1.9.11.03 Education
+Part Number	GW1NR-LV9QN88PC6/I5
+Device	GW1NR-9
+Device Version	C
+Created Time	Thu Sep 17 14:50:02 2026
+Legal Announcement	Copyright (C)2014-2025 Gowin Semiconductor Corporation. All rights reserved.
+Timing Summaries
+STA Tool Run Summary:
+Setup Delay Model	Slow 1.14V 85C C6/I5
+Hold Delay Model	Fast 1.26V 0C C6/I5
+Numbers of Paths Analyzed	10879
+Numbers of Endpoints Analyzed	10686
+Numbers of Falling Endpoints	0
+Numbers of Setup Violated Endpoints	0
+Numbers of Hold Violated Endpoints	0
+Clock Summary:
+NO.	Clock Name	Type	Period	Frequency(MHz)	Rise	Fall	Source	Master	Objects
+1	clk_27mhz	Base	37.037	27.000
+0.000	18.519			clk_27mhz_ibuf/I 
+Max Frequency Summary:
+NO.	Clock Name	Constraint	Actual Fmax	Logic Level	Entity
+1	clk_27mhz	27.000(MHz)	39.625(MHz)	6	TOP
+Total Negative Slack Summary:
+Clock Name	Analysis Type	Endpoints TNS	Number of Endpoints
+clk_27mhz	Setup	0.000	0
+clk_27mhz	Hold	0.000	0
+Timing Details
+Path Slacks Table:
+Setup Paths Table
+Report Command:report_timing -setup -max_paths 25 -max_common_paths 1
+Path Number	Path Slack	From Node	To Node	From Clock	To Clock	Relation	Clock Skew	Data Delay
+1	11.801	u_fir/mac_cnt_3_s0/Q	u_fir/acc_14_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	24.836
+2	11.814	u_fir/mac_cnt_3_s0/Q	u_fir/acc_12_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	24.823
+3	12.513	u_fir/mac_cnt_3_s0/Q	u_fir/acc_13_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	24.124
+4	12.698	u_fir/mac_cnt_3_s0/Q	u_fir/acc_37_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.939
+5	12.699	u_fir/mac_cnt_3_s0/Q	u_fir/acc_28_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.938
+6	12.699	u_fir/mac_cnt_3_s0/Q	u_fir/acc_38_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.938
+7	12.766	u_fir/mac_cnt_3_s0/Q	u_fir/acc_31_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.871
+8	12.833	u_fir/mac_cnt_3_s0/Q	u_fir/acc_5_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.804
+9	12.868	u_fir/mac_cnt_3_s0/Q	u_fir/acc_8_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.769
+10	12.879	u_fir/mac_cnt_3_s0/Q	u_fir/acc_0_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.758
+11	12.926	u_fir/mac_cnt_3_s0/Q	u_fir/add_3309_s3/C[38]	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	24.111
+12	12.930	u_fir/mac_cnt_3_s0/Q	u_fir/acc_11_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.707
+13	12.936	u_fir/mac_cnt_3_s0/Q	u_fir/acc_32_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.701
+14	12.976	u_fir/mac_cnt_3_s0/Q	u_fir/acc_3_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.661
+15	13.142	u_fir/mac_cnt_3_s0/Q	u_fir/acc_2_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.495
+16	13.178	u_fir/mac_cnt_3_s0/Q	u_fir/acc_40_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.459
+17	13.218	u_fir/mac_cnt_3_s0/Q	u_fir/acc_24_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.419
+18	13.249	u_fir/mac_cnt_3_s0/Q	u_fir/acc_33_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.388
+19	13.256	u_fir/mac_cnt_3_s0/Q	u_fir/add_3309_s3/C[37]	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.781
+20	13.257	u_fir/mac_cnt_3_s0/Q	u_fir/add_3309_s3/C[28]	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.780
+21	13.261	u_fir/mac_cnt_3_s0/Q	u_fir/acc_10_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.376
+22	13.314	u_fir/mac_cnt_3_s0/Q	u_fir/acc_30_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.323
+23	13.314	u_fir/mac_cnt_3_s0/Q	u_fir/acc_36_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.323
+24	13.342	u_fir/mac_cnt_3_s0/Q	u_fir/acc_7_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.295
+25	13.346	u_fir/mac_cnt_3_s0/Q	u_fir/acc_29_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	37.037	0.000	23.291
+Hold Paths Table
+Report Command:report_timing -hold -max_paths 25 -max_common_paths 1
+Path Number	Path Slack	From Node	To Node	From Clock	To Clock	Relation	Clock Skew	Data Delay
+1	0.512	u_ldr/coeff_data_4_s0/Q	u_fir/h_ram_h_ram_0_0_s/DI[4]	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.598
+2	0.708	u_utx/sample_cnt_2_s1/Q	u_utx/sample_cnt_2_s1/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+3	0.708	u_utx/bit_cnt_1_s0/Q	u_utx/bit_cnt_1_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+4	0.708	u_unb/byte_cnt_2_s1/Q	u_unb/byte_cnt_2_s1/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+5	0.708	u_fifo/rd_ptr_4_s3/Q	u_fifo/rd_ptr_4_s3/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+6	0.708	u_fifo/wr_ptr_0_s3/Q	u_fifo/wr_ptr_0_s3/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+7	0.708	u_fifo/rd_ptr_5_s0/Q	u_fifo/rd_ptr_5_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+8	0.708	u_fifo/rd_ptr_9_s0/Q	u_fifo/rd_ptr_9_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+9	0.708	u_fir/mac_cnt_0_s9/Q	u_fir/mac_cnt_0_s9/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+10	0.708	u_ctrl/fir_x_valid_s3/Q	u_ctrl/fir_x_valid_s3/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+11	0.708	u_ctrl/rom_addr_0_s1/Q	u_ctrl/rom_addr_0_s1/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+12	0.708	u_pack/state_s1/Q	u_pack/state_s1/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+13	0.708	u_urx/bit_cnt_2_s0/Q	u_urx/bit_cnt_2_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+14	0.708	u_bau/count_7_s0/Q	u_bau/count_7_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+15	0.708	u_bau/count_2_s0/Q	u_bau/count_2_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+16	0.708	u_bau/count_3_s0/Q	u_bau/count_3_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+17	0.708	u_bau/count_6_s0/Q	u_bau/count_6_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+18	0.708	mode_s2/Q	mode_s2/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+19	0.708	db_cnt_1_s0/Q	db_cnt_1_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+20	0.708	db_cnt_3_s0/Q	db_cnt_3_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+21	0.708	db_cnt_4_s0/Q	db_cnt_4_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+22	0.708	db_cnt_13_s0/Q	db_cnt_13_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+23	0.708	db_cnt_19_s0/Q	db_cnt_19_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.708
+24	0.709	u_utx/state_2_s0/Q	u_utx/state_2_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.709
+25	0.709	u_utx/bit_cnt_2_s0/Q	u_utx/bit_cnt_2_s0/D	clk_27mhz:[R]	clk_27mhz:[R]	0.000	0.000	0.709
+Recovery Paths Table
+Report Command:report_timing -recovery -max_paths 25 -max_common_paths 1
+Nothing to report!
+Removal Paths Table
+Report Command:report_timing -removal -max_paths 25 -max_common_paths 1
+Nothing to report!
+Minimum Pulse Width Table:
+Report Command:report_min_pulse_width -nworst 10 -detail
+Number	Slack	Actual Width	Required Width	Type	Clock	Objects
+1	15.130	16.380	1.250	High Pulse Width	clk_27mhz	key2_d2_s0
+2	15.130	16.380	1.250	High Pulse Width	clk_27mhz	db_cnt_19_s0
+3	15.130	16.380	1.250	High Pulse Width	clk_27mhz	db_cnt_17_s0
+4	15.130	16.380	1.250	High Pulse Width	clk_27mhz	db_cnt_13_s0
+5	15.130	16.380	1.250	High Pulse Width	clk_27mhz	db_cnt_5_s0
+6	15.130	16.380	1.250	High Pulse Width	clk_27mhz	u_bau/count_0_s0
+7	15.130	16.380	1.250	High Pulse Width	clk_27mhz	u_pack/valid_out_s0
+8	15.130	16.380	1.250	High Pulse Width	clk_27mhz	u_ctrl/rom_addr_6_s0
+9	15.130	16.380	1.250	High Pulse Width	clk_27mhz	u_fir/x_shift[7]_12_s0
+10	15.130	16.380	1.250	High Pulse Width	clk_27mhz	u_fir/x_shift[23]_12_s0
+Timing Report By Analysis Type:
+Setup Analysis Report
+Report Command:report_timing -setup -max_paths 25 -max_common_paths 1
+Path1
+Path Summary:
+
+Slack	11.801
+Data Arrival Time	29.310
+Data Required Time	41.111
+From	u_fir/mac_cnt_3_s0
+To	u_fir/acc_14_s0
+Launch Clk	clk_27mhz:[R]
+Latch Clk	clk_27mhz:[R]
+Data Arrival Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+0.000	0.000					active clock edge time
+0.000	0.000					clk_27mhz
+0.000	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+4.230	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+4.474	0.244	tNET	RR	1	R22C21[0][B]	u_fir/mac_cnt_3_s0/CLK
+4.932	0.458	tC2Q	RF	211	R22C21[0][B]	u_fir/mac_cnt_3_s0/Q
+16.162	11.230	tNET	FF	1	R3C39[1][B]	u_fir/n3299_s475/S0
+16.664	0.502	tINS	FF	1	R3C39[1][B]	u_fir/n3299_s475/O
+16.664	0.000	tNET	FF	1	R3C39[3][B]	u_fir/n3299_s458/I1
+16.827	0.163	tINS	FF	1	R3C39[3][B]	u_fir/n3299_s458/O
+20.892	4.065	tNET	FF	1	R11C10[3][B]	u_fir/n3299_s659/I0
+21.714	0.822	tINS	FF	1	R11C10[3][B]	u_fir/n3299_s659/F
+21.714	0.000	tNET	FF	1	R11C10[3][A]	u_fir/n3299_s556/I1
+21.863	0.149	tINS	FF	1	R11C10[3][A]	u_fir/n3299_s556/O
+21.863	0.000	tNET	FF	1	R11C10[2][B]	u_fir/n3299_s462/I0
+22.026	0.163	tINS	FF	1	R11C10[2][B]	u_fir/n3299_s462/O
+24.617	2.591	tNET	FF	54	DSP_R19[2][A]	u_fir/add_3309_s3/A1[8]
+24.887	0.270	tINS	FF	1	DSP_R19[2][A]	u_fir/add_3309_s3/DOUT[14]
+25.377	0.490	tNET	FF	1	R20C22[3][A]	u_fir/n3267_s1/I1
+26.409	1.032	tINS	FF	2	R20C22[3][A]	u_fir/n3267_s1/F
+29.310	2.901	tNET	FF	1	R18C16[0][A]	u_fir/acc_14_s0/D
+Data Required Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+37.037	37.037					active clock edge time
+37.037	0.000					clk_27mhz
+37.037	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+41.267	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+41.511	0.244	tNET	RR	1	R18C16[0][A]	u_fir/acc_14_s0/CLK
+41.111	-0.400	tSu		1	R18C16[0][A]	u_fir/acc_14_s0
+Path Statistics:
+
+Clock Skew	0.000
+Setup Relationship 	37.037
+Logic Level	6
+Arrival Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Arrival Data Path Delay	cell: 3.101, 12.486%; route: 21.277, 85.669%; tC2Q: 0.458, 1.845%
+Required Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Path2
+Path Summary:
+
+Slack	11.814
+Data Arrival Time	29.297
+Data Required Time	41.111
+From	u_fir/mac_cnt_3_s0
+To	u_fir/acc_12_s0
+Launch Clk	clk_27mhz:[R]
+Latch Clk	clk_27mhz:[R]
+Data Arrival Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+0.000	0.000					active clock edge time
+0.000	0.000					clk_27mhz
+0.000	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+4.230	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+4.474	0.244	tNET	RR	1	R22C21[0][B]	u_fir/mac_cnt_3_s0/CLK
+4.932	0.458	tC2Q	RF	211	R22C21[0][B]	u_fir/mac_cnt_3_s0/Q
+16.162	11.230	tNET	FF	1	R3C39[1][B]	u_fir/n3299_s475/S0
+16.664	0.502	tINS	FF	1	R3C39[1][B]	u_fir/n3299_s475/O
+16.664	0.000	tNET	FF	1	R3C39[3][B]	u_fir/n3299_s458/I1
+16.827	0.163	tINS	FF	1	R3C39[3][B]	u_fir/n3299_s458/O
+20.892	4.065	tNET	FF	1	R11C10[3][B]	u_fir/n3299_s659/I0
+21.714	0.822	tINS	FF	1	R11C10[3][B]	u_fir/n3299_s659/F
+21.714	0.000	tNET	FF	1	R11C10[3][A]	u_fir/n3299_s556/I1
+21.863	0.149	tINS	FF	1	R11C10[3][A]	u_fir/n3299_s556/O
+21.863	0.000	tNET	FF	1	R11C10[2][B]	u_fir/n3299_s462/I0
+22.026	0.163	tINS	FF	1	R11C10[2][B]	u_fir/n3299_s462/O
+24.617	2.591	tNET	FF	54	DSP_R19[2][A]	u_fir/add_3309_s3/A1[8]
+24.891	0.273	tINS	FR	1	DSP_R19[2][A]	u_fir/add_3309_s3/DOUT[12]
+25.309	0.419	tNET	RR	1	R20C22[0][A]	u_fir/n3269_s1/I1
+26.408	1.099	tINS	RF	2	R20C22[0][A]	u_fir/n3269_s1/F
+29.297	2.889	tNET	FF	1	R18C16[0][B]	u_fir/acc_12_s0/D
+Data Required Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+37.037	37.037					active clock edge time
+37.037	0.000					clk_27mhz
+37.037	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+41.267	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+41.511	0.244	tNET	RR	1	R18C16[0][B]	u_fir/acc_12_s0/CLK
+41.111	-0.400	tSu		1	R18C16[0][B]	u_fir/acc_12_s0
+Path Statistics:
+
+Clock Skew	0.000
+Setup Relationship 	37.037
+Logic Level	6
+Arrival Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Arrival Data Path Delay	cell: 3.171, 12.776%; route: 21.194, 85.378%; tC2Q: 0.458, 1.846%
+Required Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Path3
+Path Summary:
+
+Slack	12.513
+Data Arrival Time	28.598
+Data Required Time	41.111
+From	u_fir/mac_cnt_3_s0
+To	u_fir/acc_13_s0
+Launch Clk	clk_27mhz:[R]
+Latch Clk	clk_27mhz:[R]
+Data Arrival Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+0.000	0.000					active clock edge time
+0.000	0.000					clk_27mhz
+0.000	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+4.230	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+4.474	0.244	tNET	RR	1	R22C21[0][B]	u_fir/mac_cnt_3_s0/CLK
+4.932	0.458	tC2Q	RF	211	R22C21[0][B]	u_fir/mac_cnt_3_s0/Q
+16.162	11.230	tNET	FF	1	R3C39[1][B]	u_fir/n3299_s475/S0
+16.664	0.502	tINS	FF	1	R3C39[1][B]	u_fir/n3299_s475/O
+16.664	0.000	tNET	FF	1	R3C39[3][B]	u_fir/n3299_s458/I1
+16.827	0.163	tINS	FF	1	R3C39[3][B]	u_fir/n3299_s458/O
+20.892	4.065	tNET	FF	1	R11C10[3][B]	u_fir/n3299_s659/I0
+21.714	0.822	tINS	FF	1	R11C10[3][B]	u_fir/n3299_s659/F
+21.714	0.000	tNET	FF	1	R11C10[3][A]	u_fir/n3299_s556/I1
+21.863	0.149	tINS	FF	1	R11C10[3][A]	u_fir/n3299_s556/O
+21.863	0.000	tNET	FF	1	R11C10[2][B]	u_fir/n3299_s462/I0
+22.026	0.163	tINS	FF	1	R11C10[2][B]	u_fir/n3299_s462/O
+24.617	2.591	tNET	FF	54	DSP_R19[2][A]	u_fir/add_3309_s3/A1[8]
+24.891	0.273	tINS	FR	1	DSP_R19[2][A]	u_fir/add_3309_s3/DOUT[13]
+25.309	0.419	tNET	RR	1	R20C22[0][B]	u_fir/n3268_s1/I1
+26.341	1.032	tINS	RF	2	R20C22[0][B]	u_fir/n3268_s1/F
+28.598	2.257	tNET	FF	1	R20C18[2][B]	u_fir/acc_13_s0/D
+Data Required Path:
+
+AT	DELAY	TYPE	RF	FANOUT	LOC	NODE
+37.037	37.037					active clock edge time
+37.037	0.000					clk_27mhz
+37.037	0.000	tCL	RR	1	IOR17[A]	clk_27mhz_ibuf/I
+41.267	4.230	tINS	RR	3567	IOR17[A]	clk_27mhz_ibuf/O
+41.511	0.244	tNET	RR	1	R20C18[2][B]	u_fir/acc_13_s0/CLK
+41.111	-0.400	tSu		1	R20C18[2][B]	u_fir/acc_13_s0
+Path Statistics:
+
+Clock Skew	0.000
+Setup Relationship 	37.037
+Logic Level	6
+Arrival Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Arrival Data Path Delay	cell: 3.104, 12.868%; route: 20.562, 85.232%; tC2Q: 0.458, 1.900%
+Required Clock Path Delay	cell: 4.230, 94.547%; route: 0.244, 5.453%
+Path4
+Path Summary:
+
+Slack	12.698
+Data Arrival Time	28.413
+Data Required Time	41.111
+From	u_fir/mac_cnt_3_s0
+To	u_fir/acc_37_s0
+Launch Clk	clk_27mhz:[R]
+Latch Clk	clk_27mhz:[R]
+Data Arrival Path:

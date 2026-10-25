@@ -1,0 +1,26 @@
+[
+  {
+    "packaged_path": "fir-fpga-project/app.py",
+    "original_attachment": "Văn bản đã dán (1)(3).txt",
+    "sha256": "8f5d4742bf2918187632023cb4e1507c09b795c9639cd0f7ceed92f7179e4f91",
+    "byte_identical_to_attachment": true
+  },
+  {
+    "packaged_path": "fir-fpga-project/rtl/top_system.v",
+    "original_attachment": "Văn bản đã dán (1)(2).txt",
+    "sha256": "fae866d3051b909530b6d2ab891485dfda49d5987faa351f5c5c3846d23bcf41",
+    "byte_identical_to_attachment": true
+  },
+  {
+    "packaged_path": "reports/gowin_timing_report.txt",
+    "original_attachment": "Văn bản đã dán (2).txt",
+    "sha256": "65f83db898eca7116777c9483cec283327b72b86b9f3c31855c8f2c9ad22ad38",
+    "byte_identical_to_attachment": true
+  },
+  {
+    "packaged_path": "reports/project_report.pdf",
+    "original_attachment": "tiểu luận cuối kì(1).pdf",
+    "sha256": "fccbd719dfb28c9ffe1f24a3b4b06874fc65e6d028b16ee5fcaaf7da87e1e112",
+    "byte_identical_to_attachment": true
+  }
+]

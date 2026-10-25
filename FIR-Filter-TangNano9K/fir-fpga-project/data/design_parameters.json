@@ -1,0 +1,17 @@
+{
+  "origin": "Software reference generated from the supplied app.py default design",
+  "is_hardware_capture": false,
+  "fs_hz": 8000,
+  "passband_edge_hz": 1000,
+  "stopband_edge_hz": 1400,
+  "target_attenuation_db": 60,
+  "active_taps": 75,
+  "hardware_taps": 200,
+  "kaiser_beta": 5.65326,
+  "sample_count": 1000,
+  "coefficient_and_input_scale": 32767,
+  "app_output_display_divisor": 1073741824,
+  "reference_encoding": "One 41-bit two's-complement result per hex line",
+  "numpy_version": "2.3.5",
+  "scipy_version": "1.17.0"
+}

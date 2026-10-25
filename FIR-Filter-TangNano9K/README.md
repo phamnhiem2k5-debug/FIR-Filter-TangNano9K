@@ -1,119 +1,136 @@
 # Reconfigurable FIR Filter on Tang Nano 9K
 
-**Verilog RTL · Sequential MAC · UART coefficient loading · Python / Streamlit verification**
+**Verilog HDL · Sequential MAC · UART · Python · Streamlit**
 
-A low-pass FIR filter implemented on the Sipeed Tang Nano 9K FPGA. The design combines a fixed 200-tap hardware datapath, UART-based coefficient loading, ROM-based input signals, and a Streamlit application for filter design and output analysis.
+A configurable low-pass FIR filter implemented on the **Sipeed Tang Nano 9K FPGA**. The project combines a fixed 200-tap hardware datapath with UART coefficient loading and a Python/Streamlit application for filter design, test-vector generation, and output verification.
 
-**Start here:** [Chạy và upload bằng tiếng Việt](HUONG_DAN_UPLOAD.md) · [Hardware setup](docs/HARDWARE_SETUP.md) · [Result gallery](docs/RESULTS_GALLERY.md) · [Project report](reports/project_report.pdf)
+## Interactive application
 
-![Reported 75-tap verification results](docs/images/case2_results.png)
+### [Open the FIR Design and Verification App](https://fir-filter-tangnano9k-c9gtlotqpafsu5vqvetx56.streamlit.app/)
 
-*Case 2 results extracted from the project report, Figure 4.21. This is reported evidence, not a new FPGA measurement performed while packaging this repository.*
+Use the web application to design a Kaiser-window FIR filter, inspect its frequency response, generate input and coefficient files, and upload FPGA output files for comparison.
 
-## Highlights
+**Documentation:** [Hardware setup](docs/HARDWARE_SETUP.md) · [UART protocol](docs/UART_PROTOCOL.md) · [Result gallery](docs/RESULTS_GALLERY.md) · [Project report](reports/project_report.pdf) · [Hướng dẫn tiếng Việt](HUONG_DAN_UPLOAD.md)
 
-- Implements a sequential multiply-accumulate datapath for 200 hardware taps.
-- Accepts signed 16-bit samples and signed 16-bit coefficients.
-- Accumulates FIR results into a signed 41-bit word.
-- Loads 200 coefficients over UART after reset, without rebuilding the bitstream.
-- Selects chirp or Dirac impulse input data from two 1000-sample ROMs.
-- Buffers output in a 1024 × 41-bit FIFO before UART transmission.
-- Provides a Streamlit interface for Kaiser-window design, HEX export, and file-based output verification.
+![FPGA and Python comparison for the 75-tap configuration](docs/images/case2_results.png)
+
+*75-tap configuration: waveform comparison, group delay, and frequency response. Image extracted from Figure 4.21 of the project report.*
+
+## Features
+
+- **200-tap FIR core** using a sequential multiply-accumulate architecture.
+- **16-bit signed inputs and coefficients**, with a 41-bit accumulated output.
+- **UART coefficient loading** after reset, without rebuilding or reprogramming the bitstream.
+- **Chirp and Dirac impulse test signals** stored in two 1000-sample ROMs.
+- **1024 × 41-bit FIFO** to buffer results before UART transmission.
+- **Python reference model** for output comparison and error analysis.
+- **Streamlit interface** for filter design, HEX export, result visualization, and CSV export.
 
 ## System architecture
 
-![System architecture from the report](docs/images/system_architecture.png)
+![FIR system architecture](docs/images/system_architecture.png)
 
-The coefficient path is **PC UART utility → UART RX → Byte Packer → Coefficient Loader → coefficient memory**.
+The system has two main paths:
 
-The filtering path is **input ROM → FIR core → FIFO → output byte packer → UART TX → PC capture utility**.
-
-The Streamlit app designs filters and processes uploaded result files. It does **not** directly open a serial port; the original UART transfer/capture utility was not supplied.
-
-![Sequential MAC datapath](docs/images/fir_mac_architecture.png)
-
-The RTL always executes 200 MAC iterations per output sample. Shorter filters are represented by zero-padding coefficients to 200 entries; they do not shorten the MAC loop in this version.
-
-## Specifications
-
-| Parameter | Implementation |
+| Path | Processing flow |
 |---|---|
-| Board / FPGA | Sipeed Tang Nano 9K / GW1NR-9 |
-| Supplied target part | GW1NR-LV9QN88PC6/I5 |
+| Coefficient loading | PC UART utility → UART RX → Byte Packer → Coefficient Loader → coefficient memory |
+| Filtering and output | Input ROM → ROM Controller → FIR Core → FIFO → Byte Unpacker → UART TX → PC capture utility |
+
+The FIR core reuses one MAC datapath across **200 iterations per output sample**. Filters with fewer active coefficients are padded with zeros to the fixed hardware length; the number of MAC iterations remains 200.
+
+The Streamlit application exchanges data through files. UART transfer and capture require a separate utility; serial-port communication is not implemented in the supplied `app.py`.
+
+## Design specifications
+
+| Parameter | Value |
+|---|---|
+| Development board | Sipeed Tang Nano 9K |
+| FPGA target | GW1NR-LV9QN88PC6/I5 |
 | System clock | 27 MHz |
-| Hardware filter length | Fixed 200 taps |
-| Input | Signed 16-bit samples |
-| Coefficients | Signed 16-bit, Q15-style quantization |
-| Accumulator / output | Signed 41-bit raw sum of products |
-| UART | Nominal 9600 baud, 8 data bits, no parity, 1 stop bit |
-| Coefficient order | Two bytes per coefficient, high byte first |
-| Result order | Six bytes per result, high byte first |
-| Input ROMs | Chirp and Dirac impulse, 1000 samples each |
-| FIFO | 1024 words × 41 bits |
+| Hardware filter length | 200 taps |
+| Input samples | Signed 16-bit |
+| Filter coefficients | Signed 16-bit, Q15-style quantization |
+| Accumulator and output | Signed 41-bit raw sum of products |
+| UART configuration | Nominal 9600 baud, 8N1 |
+| Coefficient payload | 200 words, two bytes per word, high byte first |
+| Result payload | Six bytes per sample, high byte first |
+| Test signal memory | 1000 chirp samples and 1000 Dirac samples |
+| Output FIFO | 1024 × 41 bits |
 
-The supplied app quantizes coefficients and input samples using a scale of **32767**. The RTL does not shift the accumulated result back to 16 bits. The app decodes signed 41-bit results and divides by **2^30** for display and comparison. See [numeric and UART details](docs/UART_PROTOCOL.md).
+The app quantizes coefficients and input samples using a scale of **32767**. The RTL outputs the raw accumulated sum; the app decodes the signed 41-bit result and divides by **2^30** for display and comparison. See [numeric format and UART details](docs/UART_PROTOCOL.md).
 
-## Run the Streamlit application
+## Run locally
 
-From the repository root, with Python available:
+From the repository root:
 
 ```bash
 python -m pip install -r fir-fpga-project/requirements.txt
 python -m streamlit run fir-fpga-project/app.py
 ```
 
-The four app tabs support:
+The application provides four tabs:
 
-1. Low-pass filter specifications and Kaiser-window design.
-2. Python frequency-response visualization.
-3. Export of coefficients, chirp/Dirac inputs, and a configuration header.
-4. Upload of FPGA HEX outputs, waveform/error analysis, and CSV export.
+1. **Design** — enter filter specifications and calculate Kaiser coefficients.
+2. **Python simulation** — inspect the filter frequency response.
+3. **Test data and export** — generate chirp/Dirac inputs and download HEX files.
+4. **Verification** — upload FPGA outputs, compare waveforms, inspect errors, and export CSV data.
 
-For Streamlit Community Cloud, select branch `main` and entrypoint **`fir-fpga-project/app.py`**. Dependencies are in the adjacent `requirements.txt`.
+### Streamlit Community Cloud configuration
 
-## Included example data
+| Setting | Value |
+|---|---|
+| Repository | `phamnhiem2k5-debug/fir-filter-tangnano9k` |
+| Branch | `main` |
+| Main file path | `fir-fpga-project/app.py` |
+| Python version | `3.12` |
+| Dependency file | `fir-fpga-project/requirements.txt` |
 
-The [data directory](fir-fpga-project/data/README.md) contains a reproducible default design: Fs = 8000 Hz, Fp = 1000 Hz, Fstop = 1400 Hz, target attenuation = 60 dB, 75 active taps padded to 200.
+Python 3.12 is compatible with the `numpy==1.26.4` and `scipy==1.13.1` versions used in the deployment configuration. Select it in **Advanced settings** when deploying with those pins.
+
+## Example data and verification
+
+The included example uses **Fs = 8000 Hz**, **Fp = 1000 Hz**, **Fstop = 1400 Hz**, and a **60 dB target attenuation**. Its 75 active coefficients are padded to 200.
+
+Regenerate the example files:
 
 ```bash
 python scripts/generate_vectors.py
 ```
 
-The script regenerates `coeff.hex`, `input_chirp.hex`, `input_dirac.hex`, and **software reference** outputs. The reference files are not captured FPGA results.
+This produces coefficient/input HEX files and software reference outputs in [the data directory](fir-fpga-project/data/README.md). Files named `reference_*.hex` are calculated references, not FPGA captures.
 
-To check a real chirp capture containing one output word per line:
+To verify a real chirp capture with one output word per HEX line:
 
 ```bash
 python scripts/compare_hex.py captures/output_chirp.hex fir-fpga-project/data/reference/reference_chirp.hex
 ```
 
-The command requires equal sample counts and checks every raw signed integer result. Use the matching coefficients and ROM data when collecting captures.
+The helper checks every signed integer output and requires matching sample counts. Capture data using the same coefficients and ROM inputs as the reference.
 
-## Reported verification results
+## Verification results
 
-The supplied report documents RTL simulation using **Xilinx ISE/ISim** and system-level comparisons using Python/Streamlit. The original testbench and raw hardware output files were not included in the supplied source material.
+The project report documents **Xilinx ISE/ISim RTL simulation** and **Python/Streamlit system-level verification**. The following values are transcribed from its reported test results.
 
-| Case | Active coefficient length | Hardware length | Reported MSE | Reported max error | Reported Ep | Reported Es |
-|---|---:|---:|---:|---:|---:|---:|
-| 1 | 19 | 200 | 0 | 0 | 0.013787 | 0.011013 |
-| 2 | 75 | 200 | 0 | 0 | 0.001092 | 0.001099 |
-| 3 | 175 | 200 | 0 | 0 | 0.000409 | 0.000452 |
+| Active taps | Hardware taps | MSE | Maximum absolute error | Passband ripple Ep | Stopband leakage Es |
+|---:|---:|---:|---:|---:|---:|
+| 19 | 200 | 0 | 0 | 0.013787 | 0.011013 |
+| 75 | 200 | 0 | 0 | 0.001092 | 0.001099 |
+| 175 | 200 | 0 | 0 | 0.000409 | 0.000452 |
 
-Source: Table 4.10, PDF page 67 of the [report](reports/project_report.pdf). [CSV copy](reports/reported_filter_results.csv).
+Source: Table 4.10, PDF page 67 of the [project report](reports/project_report.pdf). A [CSV version](reports/reported_filter_results.csv) is included.
 
-Zero error refers to the reported comparisons with the quantized reference for those cases. It does not establish zero error relative to an ideal floating-point filter for all inputs.
+Zero error applies to the reported comparisons against the quantized reference for those test cases. Quantization error relative to an ideal floating-point filter is a separate measurement.
 
-![Reported RTL simulation summary](docs/images/simulation_summary.png)
+![RTL integration test summary](docs/images/simulation_summary.png)
 
-*Figure 4.12: the report's 10-sample integration test summary. The supplied deployment RTL uses 1000-sample ROMs; the report's testbench configuration is a separate scenario.*
+*Figure 4.12: the report's integration simulation loads 200 coefficients, generates 10 results, and transmits 60 bytes with zero reported unit/system errors. This 10-sample test is separate from the deployment RTL's 1000-sample ROM configuration.*
 
-![FIR waveform from the report](docs/images/wave_fir_a.png)
+The [result gallery](docs/RESULTS_GALLERY.md) contains **44 extracted report images**, including architecture diagrams, RTL waveforms, application screens, and all three filter configurations.
 
-All architecture, app, waveform, and case-result images are available in the [44-image gallery](docs/RESULTS_GALLERY.md), with source page mappings.
+## FPGA implementation results
 
-## Reported FPGA implementation results
-
-| Resource | Usage | Utilization reported by Gowin |
+| Resource | Usage | Reported utilization |
 |---|---|---:|
 | Logic | 2063 / 8640 | 24% |
 | Registers | 3556 / 6693 | 54% |
@@ -122,11 +139,17 @@ All architecture, app, waveform, and case-result images are available in the [44
 | BSRAM | 4 SDPB + 2 pROM | 24% |
 | DSP | 1 MULTADDALU18X18 | 10% |
 
-The DSP percentage is retained exactly as provided; it describes the tool's resource accounting. Resource categories are not additive. [Full supplied resource table](reports/gowin_resource_usage.txt).
+Counts and percentages follow the [supplied Gowin resource table](reports/gowin_resource_usage.txt), including its DSP accounting.
 
-The supplied Gowin timing excerpt reports a **27 MHz clock**, **39.625 MHz Fmax**, and **zero setup/hold violated endpoints** in that analysis. Fmax is a timing-analysis estimate, not a demonstrated board operating frequency. The report lists `Timing Constraint File ---`; these values do not establish complete external I/O timing coverage. [Supplied timing excerpt](reports/gowin_timing_report.txt).
+The [Gowin timing excerpt](reports/gowin_timing_report.txt) reports:
 
-## Repository layout
+- **Operating clock:** 27 MHz.
+- **Estimated Fmax:** 39.625 MHz.
+- **Setup/hold violated endpoints:** 0 / 0 for the analyzed paths.
+
+Fmax is a tool-reported estimate rather than a demonstrated board frequency. The excerpt lists `Timing Constraint File ---`, so complete external I/O timing coverage is not established by these results.
+
+## Repository structure
 
 ```text
 FIR-Filter-TangNano9K/
@@ -138,26 +161,35 @@ FIR-Filter-TangNano9K/
 │   ├── requirements.txt
 │   ├── rtl/top_system.v
 │   ├── constraints/fpga_1.cst
-│   └── data/                    # Inputs, coefficients, and software references
-├── scripts/                     # Added data-generation and comparison helpers
-├── sim/README.md                # Simulation evidence and missing testbench details
-├── docs/                        # Hardware guide, protocol, provenance, and images
-└── reports/                     # Original PDF, resource table, timing excerpt, CSV
+│   └── data/
+├── scripts/
+│   ├── generate_vectors.py
+│   └── compare_hex.py
+├── sim/README.md
+├── docs/
+│   ├── HARDWARE_SETUP.md
+│   ├── UART_PROTOCOL.md
+│   ├── RESULTS_GALLERY.md
+│   ├── SOURCE_NOTES.md
+│   └── images/
+└── reports/
+    ├── project_report.pdf
+    ├── gowin_resource_usage.txt
+    ├── gowin_timing_report.txt
+    └── reported_filter_results.csv
 ```
 
-## Current scope and reproducibility
+## Current scope
 
-- Coefficient loading is allowed once per reset. Reset before loading another set.
-- Input is read from ROM, rather than an ADC or a streaming input interface.
-- `key2` toggles signal mode on each debounced press. Reset defaults to chirp mode.
-- Updating coefficients does not require rebuilding the FPGA image. Updating ROM input data does.
-- The original `.gprj`, timing `.sdc`, testbench, UART utility, raw captures, and bitstream were not supplied. This package preserves the available source and documents how to recreate the project manually; it is not an exact archive of the original build environment.
-- Python dependencies are unpinned because the original version list was not supplied.
+- Reset is required before loading another coefficient set or restarting a completed ROM run.
+- `key2` toggles chirp/Dirac mode on each debounced press. Reset selects chirp.
+- Input samples are ROM-based. Changing ROM data requires rebuilding the FPGA image; changing coefficients does not.
+- The original Gowin `.gprj`, timing `.sdc`, testbench, UART utility, raw hardware captures, and bitstream are not included.
 
-Read [source provenance and known differences](docs/SOURCE_NOTES.md) and [packaging checks](reports/PACKAGING_CHECKS.md) before interpreting reported results as newly reproduced results.
+See [hardware setup](docs/HARDWARE_SETUP.md), [source notes](docs/SOURCE_NOTES.md), and [packaging checks](reports/PACKAGING_CHECKS.md) for reconstruction steps and the scope of the included evidence.
 
-## Contributors and report
+## Contributors
 
-The supplied report lists **Đinh Thị Kiều My** and **Phạm Văn Nhiệm** as the student authors, supervised by **ThS. Nguyễn Văn Phúc**. It does not specify individual ownership of each module.
+The original project report credits **Đinh Thị Kiều My** and **Phạm Văn Nhiệm**, supervised by **ThS. Nguyễn Văn Phúc**.
 
-The [original Vietnamese project report](reports/project_report.pdf) is included unchanged. No open-source license has been selected on behalf of its authors.
+The [Vietnamese project report](reports/project_report.pdf) is included unchanged. No open-source license has been assigned.
